@@ -28,6 +28,6 @@ Just name an alien, any alien! 🌠 Whether it's the Vulcans with their pointy e
 - Importing and Using Modules:  imported the necessary modules (express, cors) using require and applied them to your Express application using app.use()
 - API Endpoint Handling:  defined two API endpoints, / and /api/:alienName, which serve HTML content and alien information, respectively. You used app.get() to define these routes and specify the request handling functions.
 - Data Storage and Retrieval: stored information about different alien species in a JavaScript object called aliens. When a request is made to /api/:alienName, you retrieve the requested alien's information from this object based on the provided :alienName parameter.
-- 
-##Optimisation:
+ 
+## Optimisation:
 - Enhance modularity and maintainability by relocating the alien data from server.js to a dedicated folder.
