@@ -1,6 +1,9 @@
 # galactic_trek
 Imagine this app as your personal tour guide to the universe's most intriguing extraterrestrial neighbors! 🌌 It's like having a space encyclopedia at your fingertips, but way more fun. 🚀
-Our Express.js-powered server is your gateway to discovering the secrets of different alien species. 🛸 It's always ready to chat on port 8001, eager to spill the beans on any alien you ask about. 😄
+Our Express.js-powered server is your gateway to discovering the secrets of different alien species. 🛸 
+
+It's always ready to chat on port 8001, eager to spill the beans on any alien you ask about. 😄
+
 Just name an alien, any alien! 🌠 Whether it's the Vulcans with their pointy ears, the Klingons and their epic battles, or even those mysterious Borgs with their pale skin and a hive mind – this app has got you covered. It'll tell you everything you need to know about their name, where they come from, their unique features, fascinating facts, and even some famous folks from their species.
 
 ## Install & Use
