@@ -74,7 +74,7 @@ app.get('/', (req,res) => {
 })
 
 app.get('/api/:alienName', (req,res) => {
-    const aliensName = req.params.alienName.toLowercase()
+    const aliensName = req.params.alienName.toLowerCase()
         if(aliens[aliensName]) {
             res.json(aliens[aliensName])
         } else {
@@ -82,6 +82,6 @@ app.get('/api/:alienName', (req,res) => {
         }
 })
 
-app.listen(parseIntrocess.env.PORT || PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
     console.log(`server is running on port ${PORT}`);
 })
