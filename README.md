@@ -31,3 +31,4 @@ Just name an alien, any alien! 🌠 Whether it's the Vulcans with their pointy e
  
 ## Optimisation:
 - Enhance modularity and maintainability by relocating the alien data from server.js to a dedicated folder.
+- MongoDB Integration: To enhance scalability and data management, will consider migrating the alien data from the current hardcoded JavaScript object into a MongoDB database. This will help improve data retrieval and maintenance, allowing the server to focus on serving API requests more efficiently. 
