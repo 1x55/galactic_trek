@@ -5,6 +5,10 @@ const PORT = process.env.PORT || 8001;
 const MongoClient = require('mongodb').MongoClient
 require('dotenv').config()
 
+
+app.use(cors())
+app.use(express.json())
+
 //aliens object
 // const aliens = {
 //     'humans': {
@@ -82,8 +86,6 @@ MongoClient.connect(dbconnectionStr)
         const infoCollection = db.collection('alien-info')
 
 
-    app.use(cors())
-
     app.get('/', (req,res) => {
     res.sendFile(__dirname + '/index.html')
     })
@@ -99,8 +101,7 @@ MongoClient.connect(dbconnectionStr)
         .catch(err => console.log(err))
     })
 })
-
-.catch(err => conole.log(err))
+.catch(err => console.log(err))
 
 app.listen(process.env.PORT || PORT, () => {
     console.log(`server is running on port ${PORT}`);
