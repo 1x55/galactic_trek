@@ -2,9 +2,10 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const PORT = process.env.PORT || 8001;
+const MongoClient = require('mongodb').MongoClient
+require('dotenv').config()
 
-app.use(cors())
-
+//aliens object
 const aliens = {
     'humans': {
         'speciesName' : 'Humans',
@@ -24,12 +25,13 @@ const aliens = {
         'image': 'https://static.wikia.nocookie.net/aliens/images/7/75/Vulcans-FirstContact.jpg'
     },
 
-    'klingons': {'speciesName' : 'Klingons',
-    'homeworld': "Qo'noS",
-    'features':'Large stature, pronounced ridges on the forehead, stylized facial hair',
-    'interestingFact': 'Highly skilled in weapons and battle. Their facial ridges were lost as the result of a virus in 2154, but were subsequently restored by 2269.' ,
-    'notableExamples' : "Worf, Kor, Kang",
-    'image': 'https://static.wikia.nocookie.net/aliens/images/7/74/Kruge.jpg'
+    'klingons': {
+        'speciesName' : 'Klingons',
+        'homeworld': "Qo'noS",
+        'features':'Large stature, pronounced ridges on the forehead, stylized facial hair',
+        'interestingFact': 'Highly skilled in weapons and battle. Their facial ridges were lost as the result of a virus in 2154, but were subsequently restored by 2269.' ,
+        'notableExamples' : "Worf, Kor, Kang",
+        'image': 'https://static.wikia.nocookie.net/aliens/images/7/74/Kruge.jpg'
     },
 
     'romulans': {
@@ -69,18 +71,36 @@ const aliens = {
     } 
 }
 
-app.get('/', (req,res) => {
+let db,
+    dbconnectionStr = process.env.DB_STRING
+    dbName = 'aliens-api' 
+ 
+MongoClient.connect(dbconnectionStr)
+    .then(client => {
+        console.log(`Connected to ${dbName} Database`)
+        const db = client.db(dbName)
+        const infoCollection = db.collection('alien-info')
+
+
+    app.use(cors())
+
+    app.get('/', (req,res) => {
     res.sendFile(__dirname + '/index.html')
+    })
+
+    //:alienName is a query parameter
+    app.get('/api/:alienName', (req,res) => {
+    const aliensName = req.params.alienName.toLowerCase()
+        infoCollection.find({name: aliensName}).toArray()
+        .then(results => {
+            console.log(results)
+            res.json(results[0])
+        })
+        .catch(err => console.log(err))
+    })
 })
 
-app.get('/api/:alienName', (req,res) => {
-    const aliensName = req.params.alienName.toLowerCase()
-        if(aliens[aliensName]) {
-            res.json(aliens[aliensName])
-        } else {
-            res.json(aliens['humans'])
-        }
-})
+.catch(err => conole.log(err))
 
 app.listen(process.env.PORT || PORT, () => {
     console.log(`server is running on port ${PORT}`);
