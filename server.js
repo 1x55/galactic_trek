@@ -84,7 +84,8 @@ MongoClient.connect(dbconnectionStr)
         console.log(`Connected to ${dbName} Database`)
         const db = client.db(dbName)
         const infoCollection = db.collection('alien-info')
-
+    })
+    .catch(err => console.error(err))
 
     app.get('/', (req,res) => {
     res.sendFile(__dirname + '/index.html')
@@ -98,10 +99,9 @@ MongoClient.connect(dbconnectionStr)
             console.log(results)
             res.json(results[0])
         })
-        .catch(err => console.log(err))
+        .catch(err => console.error (err))
     })
-})
-.catch(err => console.log(err))
+
 
 app.listen(process.env.PORT || PORT, () => {
     console.log(`server is running on port ${PORT}`);
